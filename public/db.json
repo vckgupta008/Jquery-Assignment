@@ -1,18 +1,6 @@
 {
   "player": [
     {
-      "id": 4,
-      "name": "Maribel Browning1",
-      "email": "sdasdsa@assa",
-      "phone": "+91 (965) 597-2042"
-    },
-    {
-      "id": 5,
-      "name": "Imogene Hunter",
-      "email": "imogenehunter@insurety.com",
-      "phone": "+91 (855) 460-3424"
-    },
-    {
       "id": 6,
       "name": "Brooks Cash",
       "email": "brookscash@insurety.com",
@@ -11413,12 +11401,6 @@
       "phone": "+91 (856) 525-3100"
     },
     {
-      "id": 1906,
-      "name": "Abbott Cummings",
-      "email": "abbottcummings@insurety.com",
-      "phone": "+91 (976) 548-3175"
-    },
-    {
       "id": 1907,
       "name": "Ward Anthony",
       "email": "wardanthony@insurety.com",
@@ -21581,78 +21563,6 @@
       "name": "Salazar Wise",
       "email": "salazarwise@insurety.com",
       "phone": "+91 (822) 589-3804"
-    },
-    {
-      "id": 3602,
-      "name": "Ginger Anderson",
-      "email": "gingeranderson@insurety.com",
-      "phone": "+91 (901) 495-3002"
-    },
-    {
-      "id": 3603,
-      "name": "Brown Randolph",
-      "email": "brownrandolph@insurety.com",
-      "phone": "+91 (889) 451-2001"
-    },
-    {
-      "id": 3604,
-      "name": "Parks Goff",
-      "email": "parksgoff@insurety.com",
-      "phone": "+91 (871) 475-3650"
-    },
-    {
-      "name": "vicky",
-      "email": "sdasdsa@assa",
-      "phone": "sddsadsad",
-      "id": 3605
-    },
-    {
-      "name": "vicky",
-      "email": "sdasdsa@assa",
-      "phone": "sddsadsad",
-      "id": 3606
-    },
-    {
-      "name": "vicky",
-      "email": "sdasdsa@assa",
-      "phone": "sddsadsad",
-      "id": 3607
-    },
-    {
-      "name": "arrow",
-      "email": "sdasdsa@assa.com",
-      "phone": "sddsadsad",
-      "id": 3608
-    },
-    {
-      "name": "arrow2",
-      "email": "sdasdsa@assa",
-      "phone": "sddsadsad",
-      "id": 3609
-    },
-    {
-      "name": "vicky",
-      "email": "sdasds@wiprp.com",
-      "phone": 9999999999,
-      "id": 3610
-    },
-    {
-      "name": "ava",
-      "email": "sdasdsa@assa",
-      "phone": 897897878787,
-      "id": 3611
-    },
-    {
-      "name": "rishi",
-      "email": "sdasdsa@assa",
-      "phone": "sddsadsad",
-      "id": 3612
-    },
-    {
-      "name": "vicky",
-      "email": "sdasdsa@assa",
-      "phone": 9999999999,
-      "id": 3613
     }
   ]
 }

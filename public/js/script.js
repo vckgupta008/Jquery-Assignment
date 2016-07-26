@@ -21,7 +21,7 @@ $('document').ready(function() {
         $("<tbody></tbody>").appendTo("#tcontent");
         for (var i = 0; i < data.length; i++) {
             //console.log(key.id);
-            var htm = "<tr id=" + data[i].id + "><td>" + data[i].id + "</td><td>" + data[i].name + "</td><td>" + data[i].email + "</td><td>" + data[i].phone + "</td> <td><a href=" + "'#myModal'" + "role=" + "'button'" + "class=" + "'btn btn-warning'" + "data-toggle=" + "'modal'" + ">Update</a></td><td><button id=" + "'delete'" + " class=" + "'btn btn-danger'" + ">Delete</button></td></tr>";
+            var htm = "<tr id=" + data[i].id + "><td>" + data[i].id + "</td><td>" + data[i].name + "</td><td>" + data[i].email + "</td><td>" + data[i].phone + "</td> <td><a href=" + "'#myModal'" + "role=" + "'button'" + "class=" + "'btn btn-warning'" + "data-toggle=" + "'modal'" + ">Update</a><button id=" + "'delete'" + " class=" + "'btn btn-danger'" + ">Delete</button></td></tr>";
             $("#tcontent>tbody").append(htm);
 
 
@@ -52,17 +52,20 @@ $('document').ready(function() {
         .delegate('#delete', 'click', function() {
             var $this = $(this).parent().parent();
             var id = $this.children("td:first").text();
-            console.log(id);
+            //console.log(id);
             $.ajax({
 
                 url: "http://localhost:8080/player/" + id,
                 method: "DELETE",
                 success: function(data) {
                     alert("successfully deleted");
-                    $this.remove();
+                    $this.fadeOut(600, function() {
+                        $this.remove();
+                    })
+
                 },
                 error: function(err) {
-                    alert("fail to load");
+                    alert("fail to delete");
                 }
             }); //end ajax
         }); //end delegate delete
@@ -91,20 +94,18 @@ $('document').ready(function() {
             temp["email"] = email;
             temp["phone"] = phone;
             $.ajax({
-                type: "PUT",
+                type: "PATCH",
                 //dataType: 'json', 
                 url: "http://localhost:8080/player/" + id,
                 data: JSON.stringify(temp),
                 contentType: "application/json"
 
-
-
             }); //end ajax
             $('#myModal').modal('hide');
-            var row = $("#tcontent tbody tr#" + id);
-            row.children("td").eq(1).text(name);
-            row.children("td").eq(2).text(email);
-            row.children("td").eq(3).text(phone);
+            // var row = $("#tcontent tbody tr#" + id);
+            $this.children("td").eq(1).text(name);
+            $this.children("td").eq(2).text(email);
+            $this.children("td").eq(3).text(phone);
             e.preventDefault();
         }); //end update
 
@@ -132,10 +133,18 @@ $('document').ready(function() {
             // dataType: 'json', 
             url: "http://localhost:8080/player",
             data: JSON.stringify(temp),
-            contentType: "application/json"
+            contentType: "application/json",
+            success: function(data, text) {
+                alert("Successfully added");
+            },
+            error: function(request, status, error) {
+                alert("failed to load" + request.responseText);
+            }
+
         });
-        alert("successfully added");
+
         $('#add').hide();
+        $('#add input').val('');
         e.preventDefault();
     });
     $('#searchbutton').click(function() {
@@ -163,8 +172,34 @@ $('document').ready(function() {
 
         }); //end ajax
         // alert(search);
+    }); //end search button
+    $("#filter").click(function() {
+        $("#tcontent").empty();
+        var select = $("#myselect option:selected").text();
+        var order = $("#order option:selected").text();
+        alert(select + " " + order);
+
+        $.ajax({
+            method: "GET",
+
+            url: "http://localhost:8080/player?_sort=" + select + "&_order=" + order,
+
+            error: function() {
+                alert("failed to load");
+            },
+            success: function(data) {
+                //console.log("yo"+data);
+                if (data == "") {
+
+                    alert("No records found");
+                } else
+                // 
+                    read(data);
+            }
+
+        }); //end ajax        
 
 
-    });
+    }); //end filter
 
 }); //end document
