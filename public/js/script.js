@@ -1,44 +1,52 @@
 $('document').ready(function() {
     $("#add").hide();
     var temp = {};
+
+    function read(data) {
+        if (data[0]) {
+            $("<thead></thead>", {
+                class: 'thead-inverse'
+            }).appendTo("#tcontent");
+
+            $("<tr></tr>").appendTo("#tcontent>thead");
+
+            var key = Object.keys(data[0])
+                //console.log(key);
+            for (var i = 0; i < key.length; i++) {
+                $("<th>" + key[i] + "</th>").appendTo("#tcontent>thead>tr");
+            }
+            $("<th colspan=" + "'2'" + ">Operations</th>").appendTo("#tcontent>thead>tr");
+            //console.log(data);
+        }
+        $("<tbody></tbody>").appendTo("#tcontent");
+        for (var i = 0; i < data.length; i++) {
+            //console.log(key.id);
+            var htm = "<tr id=" + data[i].id + "><td>" + data[i].id + "</td><td>" + data[i].name + "</td><td>" + data[i].email + "</td><td>" + data[i].phone + "</td> <td><a href=" + "'#myModal'" + "role=" + "'button'" + "class=" + "'btn btn-warning'" + "data-toggle=" + "'modal'" + ">Update</a></td><td><button id=" + "'delete'" + " class=" + "'btn btn-danger'" + ">Delete</button></td></tr>";
+            $("#tcontent>tbody").append(htm);
+
+
+        } //end for
+    } //end read function
     $("#read").on('click', function() {
         $("#add").hide();
         $("#tcontent").empty();
         $("#tcontent").show();
+
+
         $.ajax({
             type: "GET",
             url: "http://localhost:8080/player",
 
+
             success: function(data) {
-                if (data[0]) {
-                    $("<thead></thead>", {
-                        class: 'thead-inverse'
-                    }).appendTo("#tcontent");
 
-                    $("<tr></tr>").appendTo("#tcontent>thead");
-
-                    var key = Object.keys(data[0])
-                        //console.log(key);
-                    for (var i = 0; i < key.length; i++) {
-                        $("<th>" + key[i] + "</th>").appendTo("#tcontent>thead>tr");
-                    }
-                    $("<th colspan=" + "'2'" + ">Operations</th>").appendTo("#tcontent>thead>tr");
-                    console.log(data);
-                }
-                $("<tbody></tbody>").appendTo("#tcontent");
-                for (var i = 0; i < data.length; i++) {
-                    //console.log(key.id);
-                    var htm = "<tr id=" + data[i].id + "><td>" + data[i].id + "</td><td>" + data[i].name + "</td><td>" + data[i].email + "</td><td>" + data[i].phone + "</td> <td><a href=" + "'#myModal'" + "role=" + "'button'" + "class=" + "'btn btn-warning'" + "data-toggle=" + "'modal'" + ">Update</a></td><td><button id=" + "'delete'" + " class=" + "'btn btn-danger'" + ">Delete</button></td></tr>";
-                    $("#tcontent>tbody").append(htm);
-
-                    // $("<tr><td>"+data.id+"</tr></td>").appendTo("#tcontent>tbody");
-                    // $("<td>"+data.name+"</td>"+"<td>"+data.email+"</td>"+"<td>"+data.phone+"</td>").appendTo("#tcontent>tbody>tr");          
-                }
+                read(data);
             }, //end success function   
-            error: function(e) {
+            error: function(err) {
                 alert("fail to load");
             }
         }); //end ajax
+
     }); //end read
     $('#tcontent')
         .delegate('#delete', 'click', function() {
@@ -52,6 +60,9 @@ $('document').ready(function() {
                 success: function(data) {
                     alert("successfully deleted");
                     $this.remove();
+                },
+                error: function(err) {
+                    alert("fail to load");
                 }
             }); //end ajax
         }); //end delegate delete
@@ -85,16 +96,15 @@ $('document').ready(function() {
                 url: "http://localhost:8080/player/" + id,
                 data: JSON.stringify(temp),
                 contentType: "application/json"
+
+
+
             }); //end ajax
             $('#myModal').modal('hide');
             var row = $("#tcontent tbody tr#" + id);
             row.children("td").eq(1).text(name);
             row.children("td").eq(2).text(email);
             row.children("td").eq(3).text(phone);
-            // $('#tcontent tr#')
-            //$("#tcontent").empty();   
-            // $("#tcontent").hide();   
-            alert("Successfully updated");
             e.preventDefault();
         }); //end update
 
@@ -107,7 +117,6 @@ $('document').ready(function() {
     });
     $('#add').submit(function(e) {
         temp = {};
-        alert("inside submit");
         //var id = $('#add').find('input[name="id"]').val();
         var name = $('form#add input#inputName').val();
         var email = $('form#add input#email').val();
@@ -128,6 +137,34 @@ $('document').ready(function() {
         alert("successfully added");
         $('#add').hide();
         e.preventDefault();
+    });
+    $('#searchbutton').click(function() {
+        var search = $("#search").val();
+        $("#tcontent").empty();
+        //$("#tcontent").html("");
+
+        $.ajax({
+            method: "GET",
+
+            url: "http://localhost:8080/player?q=" + search,
+
+            error: function() {
+                alert("failed to load");
+            },
+            success: function(data) {
+                    //console.log("yo"+data);
+                    if (data == "") {
+
+                        alert("No records found");
+                    } else
+                    // 
+                        read(data);
+                } //end success
+
+        }); //end ajax
+        // alert(search);
+
+
     });
 
 }); //end document
