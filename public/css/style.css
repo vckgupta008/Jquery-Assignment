@@ -1,0 +1,62 @@
+body {
+    /*text-align:center; */
+    background-color: #212F3D;
+    color: #FFFFFF;
+}
+
+#form {
+    margin-top: 200px;
+    margin-bottom: 190px;
+    color: #FFFFFF;
+}
+
+table {
+    text-align: center;
+    width: 100%;
+    border-collapse: collapse;
+    word-wrap: break-word;
+}
+
+#b_add,
+#read {
+    padding-right: 10PX;
+}
+
+th {
+    background: #333;
+    color: white;
+    font-weight: bold;
+}
+
+td,
+th {
+    padding: 6px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+
+#tcontent {
+    display: hidden;
+    margin: 20px 0px;
+}
+
+#add {
+    margin: 50px -15px;
+    display: hidden;
+}
+
+h1 {
+    text-align: center;
+    background-color: black;
+    color: white;
+}
+
+table,
+td,
+th {
+    text-align: center;
+}
+
+.modal-dialog {
+    color: black;
+}
