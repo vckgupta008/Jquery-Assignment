@@ -1,8 +1,50 @@
 $('document').ready(function() {
     $("#add").hide();
+    var start = 0;
     var temp = {};
 
+
+    function get(start) {
+
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8080/player?_start=" + start + "&_limit=50",
+
+
+            success: function(data) {
+
+                read(data);
+            }, //end success function   
+            error: function(err) {
+                alert("fail to load");
+            }
+        }); //end ajax
+    } //end fn get
+    function filter(start, select, order) {
+
+        $.ajax({
+            method: "GET",
+
+            url: "http://localhost:8080/player?_sort=" + select + "&_order=" + order + "&_start=" + start + "&_limit=50",
+
+            error: function() {
+                alert("failed to load");
+            },
+            success: function(data) {
+                //console.log("yo"+data);
+                if (data == "") {
+
+                    alert("No records found");
+                } else
+                // 
+                    read(data);
+            }
+
+        }); //end ajax        
+    } //end filter function
+
     function read(data) {
+        $("#tcontent").empty();
         if (data[0]) {
             $("<thead></thead>", {
                 class: 'thead-inverse'
@@ -31,23 +73,21 @@ $('document').ready(function() {
         $("#add").hide();
         $("#tcontent").empty();
         $("#tcontent").show();
+        start = 0;
+        get(start);
+        $('#prev').click(function() {
+                start = start - 50;
+                get(start);
+            }) //end prev
 
+        $('#next').click(function() {
+                start = start + 50;
+                get(start);
+            }) //end next
 
-        $.ajax({
-            type: "GET",
-            url: "http://localhost:8080/player",
-
-
-            success: function(data) {
-
-                read(data);
-            }, //end success function   
-            error: function(err) {
-                alert("fail to load");
-            }
-        }); //end ajax
 
     }); //end read
+
     $('#tcontent')
         .delegate('#delete', 'click', function() {
             var $this = $(this).parent().parent();
@@ -178,27 +218,20 @@ $('document').ready(function() {
         var select = $("#myselect option:selected").text();
         var order = $("#order option:selected").text();
         alert(select + " " + order);
+        start = 0;
+        filter(start, select, order);
+        $('#prev').click(function() {
+                start = start - 50;
+                $("#tcontent").empty();
+                filter(start, select, order);
 
-        $.ajax({
-            method: "GET",
 
-            url: "http://localhost:8080/player?_sort=" + select + "&_order=" + order,
-
-            error: function() {
-                alert("failed to load");
-            },
-            success: function(data) {
-                //console.log("yo"+data);
-                if (data == "") {
-
-                    alert("No records found");
-                } else
-                // 
-                    read(data);
-            }
-
-        }); //end ajax        
-
+            }) //end prev
+        $('#next').click(function() {
+            start = start + 50;
+            $("#tcontent").empty();
+            filter(start, select, order);
+        })
 
     }); //end filter
 

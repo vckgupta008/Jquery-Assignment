@@ -7,6 +7,9 @@ body {
 #search {
     width: 50%;
 }
+#btn{
+    margin: 10px 450px;
+}
 
 #myselect {
     margin-right: 0px;
