@@ -8,7 +8,7 @@ $('document').ready(function() {
 
         $.ajax({
             type: "GET",
-            url: "http://localhost:8080/player?_start=" + start + "&_limit=50",
+            url: "http://localhost:8081/player?_start=" + start + "&_limit=50",
 
 
             success: function(data) {
@@ -25,7 +25,7 @@ $('document').ready(function() {
         $.ajax({
             method: "GET",
 
-            url: "http://localhost:8080/player?_sort=" + select + "&_order=" + order + "&_start=" + start + "&_limit=50",
+            url: "http://localhost:8081/player?_sort=" + select + "&_order=" + order + "&_start=" + start + "&_limit=50",
 
             error: function() {
                 alert("failed to load");
@@ -95,7 +95,7 @@ $('document').ready(function() {
             //console.log(id);
             $.ajax({
 
-                url: "http://localhost:8080/player/" + id,
+                url: "http://localhost:8081/player/" + id,
                 method: "DELETE",
                 success: function(data) {
                     alert("successfully deleted");
@@ -136,7 +136,7 @@ $('document').ready(function() {
             $.ajax({
                 type: "PATCH",
                 //dataType: 'json', 
-                url: "http://localhost:8080/player/" + id,
+                url: "http://localhost:8081/player/" + id,
                 data: JSON.stringify(temp),
                 contentType: "application/json"
 
@@ -171,7 +171,7 @@ $('document').ready(function() {
         $.ajax({
             type: "POST",
             // dataType: 'json', 
-            url: "http://localhost:8080/player",
+            url: "http://localhost:8081/player",
             data: JSON.stringify(temp),
             contentType: "application/json",
             success: function(data, text) {
@@ -195,7 +195,7 @@ $('document').ready(function() {
         $.ajax({
             method: "GET",
 
-            url: "http://localhost:8080/player?q=" + search,
+            url: "http://localhost:8081/player?q=" + search,
 
             error: function() {
                 alert("failed to load");
