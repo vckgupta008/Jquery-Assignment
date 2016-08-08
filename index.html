@@ -1,0 +1,128 @@
+
+<html>
+
+<head>
+    <title>hi</title>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="includes/js/jquery-1.8.2.min.js"></script>
+    <script src="includes/js/modernizr-2.6.2.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="includes/js/angular.js"></script>
+    <link href="includes/css/styles.css" rel="stylesheet">
+</head>
+
+<body ng-app="myModule">
+    <div ng-controller="myController">
+        <div class="container">
+            <h2><u>CRUD OPERATION USING ANGULAR JS</u></h2>
+            <a ng-click="showhide(1)" role="button" class="btn btn-primary" data-toggle="modal"><span class="glyphicon glyphicon-hand-up"></span>Add new Records</a>
+            <button type="button"  ng-click="read(0)" class="btn btn-success">Read Full Records</button>
+            <label class=" control-label" for="id">Sort By</label>
+            <select ng-model="sortVal">
+                <option value="id">Id</option>
+                <option value="name">Name</option>
+                <option value="company">Company</option>
+                <option value="email">Email</option>
+            </select>
+            <select ng-model="orderVal">
+                <option value="ASC">ASC</option>
+                <option value="DESC">DESC</option>
+            </select>
+            <button ng-click=sort(0)>Filter</button>
+            <input placeholer="search the content" type="text" ng-model="searchVal" />
+            <input type="button" ng-click="search(searchVal)" value="search" />
+            <div class="row col-sm-6" id="btn">
+                <button ng-click="StartI(-50)">(<)prev</button>
+                            <button ng-click="StartI(50)"> next(>)</button>
+            </div>
+        </div><!--end container-->
+        <div class="row col-sm-12">
+            
+                  <!-- <form ng-show="IsVisible">
+                            <label class="col-lg-1 control-label" for="inputName">Name</label>
+                            <input class="form-control"  ng-model="name" placeholder="Name" type="text" required="required">
+                            <label class="col-lg-1 control-label" for="company">Company</label>
+                            <input class="form-control" ng-model="company"  placeholder="Company" type="text" required="required">
+                            <label class="col-lg-1 control-label" for="email">Email</label>
+                            <input class="form-control" ng-model="email"  placeholder="Email id" type="email" required="required">
+                            
+                            <button type="submit" class="hi btn btn-default" ng-click="add()">Submit</button>
+                  </form> -->
+                   <div class="row" ng-model="addRecord">
+
+                 <table ng-show = "IsVisible" >
+                    <tbody>
+                    <tr>
+                        <td>Name</td>
+                        <td>
+                            <input type="text" ng-model="Name" id="fullWidth">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Company</td>
+                        <td>
+                            <input type="text" ng-model="Company" id="fullWidth">
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Email</td>
+                        <td>
+                            <input type="email" ng-model="Email" id="fullWidth">
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                    <td>&nbsp;</td>
+                    <td>
+                    <button class="btn btn-primary" ng-click="add()" ng-show="showButton" type="button">Add</button>
+                    <button class="btn btn-success" ng-click="save()" ng-hide="showButton" type="button">Save</button>
+                    <button class="btn btn-default" ng-click="close()" type="button">Close</button>
+                    </td>
+                </tr>
+                </tbody>
+                  </table> 
+              
+            </div>
+                  
+              
+            </div>
+            
+            <div class="col-sm-12">
+                
+                    
+                
+                <table class="table table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Company</th>
+                            <th>Email</th>
+                            <Th>Operations</Th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="player in players" ng-init="index=$index">
+                            <th>{{player.id}}</th>
+                            <th>{{player.name}}</th>
+                            <th>{{player.company}}</th>
+                            <th>{{player.email}}</th>
+                            <th>
+                                <button class="btn btn-warning"  ng-click="update(player,index)">Update</button>
+                                <button class="btn btn-danger" ng-init="index=$index" ng-click="delete(player.id,index)">Delete</button>
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+                <!--end player-->
+            </div>
+            <!--end col-sm-12-->
+           
+        </div>
+        <!--end row-->
+        <!--custom js-->
+        <script src="includes/js/script.js"></script>
+</body>
+
+</html>
