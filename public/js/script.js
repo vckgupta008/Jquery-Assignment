@@ -2,9 +2,10 @@ $('document').ready(function() {
     $("#add").hide();
     var start = 0;
     var temp = {};
+    
 
-
-    function get(start) {
+    function get(start) 
+    {
 
         $.ajax({
             type: "GET",
@@ -32,6 +33,7 @@ $('document').ready(function() {
             },
             success: function(data) {
                 //console.log("yo"+data);
+                console.log(data);
                 if (data == "") {
 
                     alert("No records found");
